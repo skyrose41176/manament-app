@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 import queryString from 'query-string';
 
 const axiosClient = axios.create({
-  baseURL: `/${process.env.REACT_APP_PREFIX_URL || 'admin-cars'}/api/v1`,
+  baseURL: `/api/v1`,
   headers: {
     'Content-Type': 'application/json',
   },

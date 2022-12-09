@@ -6,11 +6,11 @@ const Product = new Schema(
     name: {
       type: String,
     },
-    price: {
-      type: Number,
+    brand: {
+      type: String,
     },
-    amount: {
-      type: Number,
+    status: {
+      type: Boolean,
     },
   },
   { timestamps: true }

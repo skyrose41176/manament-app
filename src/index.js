@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080;
 mongoose.set("strictQuery", true);
 mongoose
   .connect(
-    "mongodb+srv://ngoctien:9ixQIABOvaaTfEHo@cluster0.xhlbk.mongodb.net/manament"
+    "mongodb+srv://tinhpt:67lCUZierLoZZJ0l@cluster0.zad2x.mongodb.net/manment-app"
   )
   .then(() => {
     app.listen(port, () => {

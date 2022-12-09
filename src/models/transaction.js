@@ -1,23 +1,34 @@
 const mongoose = require("mongoose");
 const user = require("./user");
-const product = require("./product");
+const modelProduct = require("./modelProduct");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const Transaction = new Schema(
   {
-    productId: {
+    modelProductId: {
       type: ObjectId,
       required: true,
-      ref: product,
+      ref: modelProduct,
     },
     userId: {
       type: ObjectId,
       ref: user,
       required: true,
     },
-    bill: {
+    priceIn: {
       type: Number,
       default: 0,
+    },
+    priceOut: {
+      type: Number,
+      default: 0,
+    },
+    profit: {
+      type: Number,
+      default: 0,
+    },
+    dateSold: {
+      type: String,
     },
   },
   { timestamps: true }

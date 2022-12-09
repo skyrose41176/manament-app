@@ -78,10 +78,10 @@ const ChiTietBannerPage = () => {
       const res = await bannerService.getOne(id);
       if (res) {
         setValue('name', res.name);
-        setValue('image', res.image);
-        setValue('status', res.status);
-        setValue('link', res.link);
-        setValue('description', res.description);
+        // setValue('image', res.image);
+        // setValue('status', res.status);
+        // setValue('link', res.link);
+        // setValue('description', res.description);
       }
     };
     id && getDetail();

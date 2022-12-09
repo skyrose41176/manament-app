@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 import queryString from 'query-string';
 
 const axiosClient = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `/api`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -38,7 +38,7 @@ axiosClient.interceptors.response.use(
     console.log('error', error.response.status);
     if (error.response.status === 401) {
       localStorage.removeItem('jwt');
-      window.location.href = (process.env.PUBLIC_URL || '/admin-cars') + '/login';
+      window.location.href = '/login';
     }
     return Promise.reject(error.response.data);
   }

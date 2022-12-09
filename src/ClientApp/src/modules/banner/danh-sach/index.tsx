@@ -1,17 +1,17 @@
 import {Button, IconButton, Stack} from '@mui/material';
-import {useEffect, useState} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {Trash} from 'iconsax-react';
 import queryString from 'query-string';
+import {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {DataTable, DialogConfirm, SearchBar} from 'src/components/base';
 import LoadingOverlay from 'src/components/base/loading-overlay';
+import {useWindowDimensions} from 'src/hooks';
 import useCheckQuyen from 'src/hooks/useCheckQuyen';
 import Page from 'src/layouts/Page';
-import {Campaign, PaginationParams, QueryParams} from 'src/models';
-import {Trash} from 'iconsax-react';
-import {colors} from 'src/theme';
-import {useWindowDimensions} from 'src/hooks';
-import {bannerService} from 'src/services';
 import {Banner} from 'src/models/banner';
+import {PaginationParams, QueryParams} from 'src/modules/common';
+import {bannerService} from 'src/services';
+import {colors} from 'src/theme';
 
 const DanhSachBannerPage = () => {
   const [checkQuyen] = useCheckQuyen();
@@ -61,11 +61,11 @@ const DanhSachBannerPage = () => {
       field: 'description',
       headerName: 'Mô tả',
     },
-    {
-      field: 'status',
-      headerName: 'Trạng thái',
-      valueGetter: (row: Banner) => (row.status ? 'true' : 'false'),
-    },
+    // {
+    //   field: 'status',
+    //   headerName: 'Trạng thái',
+    //   valueGetter: (row: Banner) => (row.status ? 'true' : 'false'),
+    // },
     ...(checkQuyen('delete')
       ? [
           {
@@ -123,7 +123,7 @@ const DanhSachBannerPage = () => {
           Thêm banner
         </Button>
       </Stack>
-      <DataTable
+      {/* <DataTable
         columns={columns}
         rows={listBanner}
         loading={isLoading}
@@ -147,7 +147,7 @@ const DanhSachBannerPage = () => {
             setFilters(prev => ({...prev, pageSize: value, pageNumber: 1}));
           },
         }}
-      />
+      /> */}
 
       <DialogConfirm
         open={isOpenDelete.visible}

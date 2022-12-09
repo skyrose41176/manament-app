@@ -1,4 +1,4 @@
-import {QueryParams, ResponseData, ResultData} from '../models';
+import {QueryParams, ResponseData, ResultData} from 'src/modules/common';
 import {Banner} from '../models/banner';
 import axiosClient from './axiosClient';
 

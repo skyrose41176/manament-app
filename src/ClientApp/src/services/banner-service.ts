@@ -1,6 +1,6 @@
 import bannerApi from 'src/apis/banner-api';
 import {Banner} from 'src/models/banner';
-import {Category, QueryParams, ResultData} from '../models';
+import {QueryParams, ResultData} from 'src/modules/common';
 import {setShowAlert} from '../redux/slice/alertSlice';
 import store from '../redux/store';
 

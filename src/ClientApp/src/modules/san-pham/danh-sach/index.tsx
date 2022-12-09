@@ -4,12 +4,13 @@ import queryString from 'query-string';
 import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useLocation, useNavigate} from 'react-router';
+import {Product} from 'src/models/product';
+import {PaginationParams, QueryParams} from 'src/modules/common';
 import {DataTable, DialogConfirm, SearchBar} from '../../../components/base';
 import LoadingOverlay from '../../../components/base/loading-overlay';
 import {useWindowDimensions} from '../../../hooks';
 import useCheckQuyen from '../../../hooks/useCheckQuyen';
 import Page from '../../../layouts/Page';
-import {PaginationParams, Product, QueryParams} from '../../../models';
 import {productService} from '../../../services';
 
 const DanhSachSanPhamPage = () => {

@@ -1,12 +1,3 @@
 export {default as accountService} from './account-service';
 export {default as productService} from './product-service';
-export {default as categoryService} from './category-service';
-export {default as campaignService} from './campaign-service';
-export {default as transactionService} from './transaction-service';
-export {default as transactionFailService} from './transaction-fail-service';
-export {default as bieuDoService} from './bieu-do-service';
 export {default as bannerService} from './banner-service';
-export {default as hopDongService} from './hop-dong-service';
-export {default as campaignProductService} from './campaign-product-service';
-export {default as xepHangService} from './xep-hang-service';
-export {default as thuongHieuService} from './thuong-hieu-service';

@@ -1,16 +1,15 @@
-import {Button, IconButton, Stack} from '@mui/material';
-import {Trash} from 'iconsax-react';
+import {Button, Stack} from '@mui/material';
 import queryString from 'query-string';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router';
+import {Product} from 'src/models/product';
+import {PaginationParams, QueryParams} from 'src/modules/common';
 import {DataTable, DialogConfirm, SearchBar} from '../../../components/base';
 import LoadingOverlay from '../../../components/base/loading-overlay';
 import {useWindowDimensions} from '../../../hooks';
 import useCheckQuyen from '../../../hooks/useCheckQuyen';
 import Page from '../../../layouts/Page';
-import {Product, PaginationParams, QueryParams} from '../../../models';
 import {productService} from '../../../services';
-import {colors} from '../../../theme';
 
 const DanhSachCacheSanPhamPage = () => {
   const location = useLocation();

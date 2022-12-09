@@ -1,6 +1,6 @@
-import {Account, Role} from '../models';
 import axiosClient from './axiosClient';
 import queryString from 'query-string';
+import {Account} from 'src/models/account';
 const accountApi = {
   login: (email: string, password: string): Promise<any> =>
     axiosClient.post('/account/authenticate', {
@@ -38,7 +38,7 @@ const accountApi = {
   removeUserFromRole: (params: {userName: string; rolename: string}): Promise<any> =>
     axiosClient.delete(`/account/removeUserFromRole?${queryString.stringify(params)}`),
   //role
-  getAllRole: (): Promise<Role[]> => axiosClient.get('/account/role'),
+  // getAllRole: (): Promise<Role[]> => axiosClient.get('/account/role'),
   createRole: (roleName: string): Promise<{result?: string; error?: string}> => {
     const url = `/account/role?roleName=${roleName}`;
     return axiosClient.post(url);

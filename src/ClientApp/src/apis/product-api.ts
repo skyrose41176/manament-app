@@ -1,4 +1,5 @@
-import {Product, QueryParams, ResponseData, ResultData} from '../models';
+import {Product} from 'src/models/product';
+import {QueryParams, ResponseData, ResultData} from 'src/modules/common';
 import axiosClient from './axiosClient';
 
 const productApi = {

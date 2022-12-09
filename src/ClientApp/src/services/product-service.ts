@@ -1,5 +1,6 @@
+import {Product} from 'src/models/product';
+import {QueryParams, ResultData} from 'src/modules/common';
 import {productApi} from '../apis';
-import {Product, QueryParams, ResultData} from '../models';
 import {setShowAlert} from '../redux/slice/alertSlice';
 import store from '../redux/store';
 

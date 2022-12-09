@@ -3,7 +3,7 @@ import {DirectSend} from 'iconsax-react';
 import React, {FC, useState} from 'react';
 import {Controller} from 'react-hook-form';
 import {colors} from '../../../theme';
-import DialogMediaUpload from '../../base/dialog-media-upload';
+// import DialogMediaUpload from '../../base/dialog-media-upload';
 
 interface Props {
   label: string;
@@ -57,7 +57,7 @@ const ImagePickerField: FC<Props> = props => {
               ),
             }}
           />
-          <DialogMediaUpload
+          {/* <DialogMediaUpload
             open={open}
             init={field.value}
             onClose={() => setOpen(false)}
@@ -65,7 +65,7 @@ const ImagePickerField: FC<Props> = props => {
               field.onChange(data[0]);
               setOpen(false);
             }}
-          />
+          /> */}
         </>
       )}
     />

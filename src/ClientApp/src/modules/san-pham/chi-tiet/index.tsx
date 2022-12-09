@@ -10,15 +10,13 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React, {useCallback, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useParams} from 'react-router-dom';
-import ThuongHieuField from 'src/components/hook-form/forms/thuong-hieu-field';
-import {XepHang} from 'src/models/xepHang';
+import {Product} from 'src/models/product';
 import {CardBase} from '../../../components/base';
 import LoadingOverlay from '../../../components/base/loading-overlay';
 import {
-  AutocompleteAsyncField,
   CheckboxField,
   ImagePickerField,
   InputField,
@@ -26,8 +24,7 @@ import {
 } from '../../../components/hook-form';
 import useCheckQuyen from '../../../hooks/useCheckQuyen';
 import Page from '../../../layouts/Page';
-import {Category, Product} from '../../../models';
-import {categoryService, productService, xepHangService} from '../../../services';
+import {productService} from '../../../services';
 
 const defaultValues = {
   productCode: '',
@@ -52,11 +49,7 @@ const defaultValues = {
   customStore: '',
 };
 const ChiTietSanPhamPage = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [xepHangs, setXepHangs] = useState<XepHang[]>([]);
   const [diaDiems, setDiaDiems] = useState<any[]>([]);
-  const [loadingCategories, setLoadingCategories] = useState(false);
-  const [loadingXepHangs, setLoadingXepHangs] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const {id = ''} = useParams<string>();
@@ -71,21 +64,11 @@ const ChiTietSanPhamPage = () => {
     formState: {isSubmitting},
   } = form;
 
-  const onSubmit = async (
-    data: Partial<
-      Product & {categoryProducts?: any; xepHangProducts?: any; thuongHieuProducts?: any}
-    >
-  ) => {
+  const onSubmit = async (data: Partial<Product>) => {
     if (id) {
       await productService.update(id, {
         id,
         ...data,
-        categoryProducts:
-          data.categories?.map((item: any) => ({categoryId: item.value, productId: id})) || [],
-        xepHangProducts:
-          data.xepHangs?.map((item: any) => ({xepHangId: item.value, productId: id})) || [],
-        thuongHieuProducts:
-          data.thuongHieus?.map((item: any) => ({thuongHieuId: item.value, productId: id})) || [],
       });
     } else {
       const res = await productService.create(data);
@@ -95,28 +78,7 @@ const ChiTietSanPhamPage = () => {
     }
   };
 
-  const getCategories = useCallback(async (value: any) => {
-    setLoadingCategories(true);
-    const res = await categoryService.getAll({search: value, pageNumber: 1, pageSize: 100});
-    if (res) {
-      setCategories(res.data);
-    }
-    setLoadingCategories(false);
-  }, []);
-
-  const getXepHangs = useCallback(async (value: any) => {
-    setLoadingCategories(true);
-    const res = await xepHangService.getAll({search: value, pageNumber: 1, pageSize: 100});
-    if (res) {
-      setXepHangs(res.data);
-    }
-    setLoadingXepHangs(false);
-  }, []);
-
-  useEffect(() => {
-    getCategories('');
-    getXepHangs('');
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const getDetail = async () => {
@@ -213,7 +175,7 @@ const ChiTietSanPhamPage = () => {
               <Grid item xs={12} md={6} lg={4}>
                 <InputField form={form} name="point" label="Điểm" />
               </Grid>
-              <Grid item xs={12} md={6} lg={4}>
+              {/* <Grid item xs={12} md={6} lg={4}>
                 <AutocompleteAsyncField
                   multiple
                   loading={loadingCategories}
@@ -223,9 +185,9 @@ const ChiTietSanPhamPage = () => {
                   name="categories"
                   label="Danh mục"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} md={6} lg={4}>
-                <ThuongHieuField form={form} name="thuongHieus" multiple />
+                {/* <ThuongHieuField form={form} name="thuongHieus" multiple /> */}
               </Grid>
               <Grid item xs={12} md={6} lg={4}>
                 {/* <InputField form={form} name="image" label="Đường dẫn ảnh sản phẩm" /> */}
@@ -238,7 +200,7 @@ const ChiTietSanPhamPage = () => {
                   label="Đường dẫn ảnh sản phẩm thu nhỏ"
                 />
               </Grid>
-              <Grid item xs={12} md={6} lg={4}>
+              {/* <Grid item xs={12} md={6} lg={4}>
                 <AutocompleteAsyncField
                   multiple
                   loading={loadingXepHangs}
@@ -248,7 +210,7 @@ const ChiTietSanPhamPage = () => {
                   name="xepHangs"
                   label="Xếp hạng"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} md={6} lg={4}>
                 <InputField form={form} name="expiredMonth" label="Thời gian hết hạn" />
               </Grid>

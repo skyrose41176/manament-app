@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename={process.env.REACT_APP_PREFIX_URL || 'admin-cars'}>
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>

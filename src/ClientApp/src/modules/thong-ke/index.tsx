@@ -5,7 +5,7 @@ import moment from 'moment';
 import {useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Page from '../../layouts/Page';
-import {bieuDoService} from '../../services';
+// import {bieuDoService} from '../../services';
 
 interface ChartData {
   labels: string[];
@@ -56,85 +56,85 @@ const TongQuanPage = () => {
       },
     },
   };
-  useEffect(() => {
-    if (dateRange[0] && dateRange[1]) {
-      bieuDoService
-        .getGDTheoNgay({
-          ngayBatDau: dateRange[0],
-          ngayKetThuc: dateRange[1],
-        })
-        .then(res => {
-          if (res) {
-            let result: ChartData = {
-              labels: [],
-              values: [],
-            };
-            const date = getDates(dateRange[0] || new Date(), dateRange[1] || new Date());
-            result.labels = date?.map(item => moment(item).format('DD/MM/YYYY')) || [];
-            result.values = [
-              {
-                name: 'Chưa sử dụng',
-                type: 'column',
-                data:
-                  date?.map(item => {
-                    return (
-                      res?.find(
-                        i =>
-                          moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
-                      )?.chuaSuDung || 0
-                    );
-                  }) || [],
-              },
-              {
-                name: 'Đã sử dụng',
-                type: 'column',
-                data:
-                  date?.map(item => {
-                    return (
-                      res?.find(
-                        i =>
-                          moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
-                      )?.daSuDung || 0
-                    );
-                  }) || [],
-              },
-              {
-                name: 'Hủy',
-                type: 'column',
-                data:
-                  date?.map(item => {
-                    return (
-                      res?.find(
-                        i =>
-                          moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
-                      )?.huy || 0
-                    );
-                  }) || [],
-              },
-              {
-                name: 'Hết hạn',
-                type: 'column',
-                data:
-                  date?.map(item => {
-                    return (
-                      res?.find(
-                        i =>
-                          moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
-                      )?.hetHan || 0
-                    );
-                  }) || [],
-              },
-            ];
-            setData(result);
-          }
-        });
-    } else {
-      setData({
-        labels: [],
-        values: [],
-      });
-    }
-  }, [dateRange]);
+  // useEffect(() => {
+  //   if (dateRange[0] && dateRange[1]) {
+  //     bieuDoService
+  //       .getGDTheoNgay({
+  //         ngayBatDau: dateRange[0],
+  //         ngayKetThuc: dateRange[1],
+  //       })
+  //       .then(res => {
+  //         if (res) {
+  //           let result: ChartData = {
+  //             labels: [],
+  //             values: [],
+  //           };
+  //           const date = getDates(dateRange[0] || new Date(), dateRange[1] || new Date());
+  //           result.labels = date?.map(item => moment(item).format('DD/MM/YYYY')) || [];
+  //           result.values = [
+  //             {
+  //               name: 'Chưa sử dụng',
+  //               type: 'column',
+  //               data:
+  //                 date?.map(item => {
+  //                   return (
+  //                     res?.find(
+  //                       i =>
+  //                         moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
+  //                     )?.chuaSuDung || 0
+  //                   );
+  //                 }) || [],
+  //             },
+  //             {
+  //               name: 'Đã sử dụng',
+  //               type: 'column',
+  //               data:
+  //                 date?.map(item => {
+  //                   return (
+  //                     res?.find(
+  //                       i =>
+  //                         moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
+  //                     )?.daSuDung || 0
+  //                   );
+  //                 }) || [],
+  //             },
+  //             {
+  //               name: 'Hủy',
+  //               type: 'column',
+  //               data:
+  //                 date?.map(item => {
+  //                   return (
+  //                     res?.find(
+  //                       i =>
+  //                         moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
+  //                     )?.huy || 0
+  //                   );
+  //                 }) || [],
+  //             },
+  //             {
+  //               name: 'Hết hạn',
+  //               type: 'column',
+  //               data:
+  //                 date?.map(item => {
+  //                   return (
+  //                     res?.find(
+  //                       i =>
+  //                         moment(i?.ngay).format('YYYY-MM-DD') === moment(item).format('YYYY-MM-DD')
+  //                     )?.hetHan || 0
+  //                   );
+  //                 }) || [],
+  //             },
+  //           ];
+  //           setData(result);
+  //         }
+  //       });
+  //   } else {
+  //     setData({
+  //       labels: [],
+  //       values: [],
+  //     });
+  //   }
+  // }, [dateRange]);
   return (
     <Page title="Thống kê">
       <Card>

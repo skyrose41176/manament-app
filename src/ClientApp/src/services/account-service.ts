@@ -1,5 +1,5 @@
+import {Account} from 'src/models/account';
 import accountApi from '../apis/account-api';
-import {Account, Role} from '../models';
 import {setShowAlert} from '../redux/slice/alertSlice';
 import store from '../redux/store';
 
@@ -184,64 +184,64 @@ const accountService = {
     return false;
   },
   //role
-  getAllRole: async (): Promise<Role[] | undefined> => {
-    try {
-      const res = await accountApi.getAllRole();
-      return res;
-    } catch (error) {
-      console.log('Lỗi get all role');
-    }
-  },
-  createRole: async (roleName: string): Promise<boolean> => {
-    try {
-      const res = await accountApi.createRole(roleName);
-      if (res.result) {
-        store.dispatch(setShowAlert({message: res.result, type: 'success'}));
-        return true;
-      } else {
-        store.dispatch(setShowAlert({message: res.error || '', type: 'error'}));
-      }
-    } catch (error) {
-      console.log('Lỗi tạo role');
-    }
-    return false;
-  },
-  updateRole: async (roleId: string, roleName: string): Promise<boolean> => {
-    try {
-      const res = await accountApi.updateRole(roleId, roleName);
-      if (res.result) {
-        store.dispatch(setShowAlert({message: res.result, type: 'success'}));
-        return true;
-      }
-    } catch (error: any) {
-      store.dispatch(
-        setShowAlert({
-          type: 'error',
-          message: error.errors?.[0] || error.message || 'Đã xảy ra lỗi',
-        })
-      );
-    }
-    return false;
-  },
-  deleteRole: async (roleId: string): Promise<boolean> => {
-    try {
-      const res = await accountApi.deleteRole(roleId);
-      if (res.result) {
-        store.dispatch(setShowAlert({message: res.result, type: 'success'}));
-        return true;
-      } else {
-        store.dispatch(setShowAlert({message: res.error || '', type: 'error'}));
-      }
-    } catch (error: any) {
-      store.dispatch(
-        setShowAlert({
-          type: 'error',
-          message: error.errors?.[0] || error.message || 'Đã xảy ra lỗi',
-        })
-      );
-    }
-    return false;
-  },
+  // getAllRole: async (): Promise<Role[] | undefined> => {
+  //   try {
+  //     const res = await accountApi.getAllRole();
+  //     return res;
+  //   } catch (error) {
+  //     console.log('Lỗi get all role');
+  //   }
+  // },
+  // createRole: async (roleName: string): Promise<boolean> => {
+  //   try {
+  //     const res = await accountApi.createRole(roleName);
+  //     if (res.result) {
+  //       store.dispatch(setShowAlert({message: res.result, type: 'success'}));
+  //       return true;
+  //     } else {
+  //       store.dispatch(setShowAlert({message: res.error || '', type: 'error'}));
+  //     }
+  //   } catch (error) {
+  //     console.log('Lỗi tạo role');
+  //   }
+  //   return false;
+  // },
+  // updateRole: async (roleId: string, roleName: string): Promise<boolean> => {
+  //   try {
+  //     const res = await accountApi.updateRole(roleId, roleName);
+  //     if (res.result) {
+  //       store.dispatch(setShowAlert({message: res.result, type: 'success'}));
+  //       return true;
+  //     }
+  //   } catch (error: any) {
+  //     store.dispatch(
+  //       setShowAlert({
+  //         type: 'error',
+  //         message: error.errors?.[0] || error.message || 'Đã xảy ra lỗi',
+  //       })
+  //     );
+  //   }
+  //   return false;
+  // },
+  // deleteRole: async (roleId: string): Promise<boolean> => {
+  //   try {
+  //     const res = await accountApi.deleteRole(roleId);
+  //     if (res.result) {
+  //       store.dispatch(setShowAlert({message: res.result, type: 'success'}));
+  //       return true;
+  //     } else {
+  //       store.dispatch(setShowAlert({message: res.error || '', type: 'error'}));
+  //     }
+  //   } catch (error: any) {
+  //     store.dispatch(
+  //       setShowAlert({
+  //         type: 'error',
+  //         message: error.errors?.[0] || error.message || 'Đã xảy ra lỗi',
+  //       })
+  //     );
+  //   }
+  //   return false;
+  // },
   addClaimToRole: async (data: {
     roleName: string;
     claimName: string;

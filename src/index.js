@@ -8,10 +8,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api", require("./routes"));
 
-app.use(express.static(path.resolve(__dirname, "./build")));
-app.get("/*", (req, res) => {
-  return res.sendFile(path.resolve(__dirname, "./build", "index.html"));
-});
+// app.use(express.static(path.resolve(__dirname, "./build")));
+// app.get("/*", (req, res) => {
+//   return res.sendFile(path.resolve(__dirname, "./build", "index.html"));
+// });
 const port = process.env.PORT || 8080;
 mongoose.set("strictQuery", true);
 mongoose

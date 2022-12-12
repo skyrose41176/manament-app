@@ -5,12 +5,15 @@ const Product = new Schema(
   {
     name: {
       type: String,
+      default: "Chưa nhập",
     },
     brand: {
       type: String,
+      default: "Chưa nhập",
     },
     status: {
       type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

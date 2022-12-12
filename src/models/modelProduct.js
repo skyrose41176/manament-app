@@ -11,15 +11,19 @@ const ModelProduct = new Schema(
     },
     dateAdd: {
       type: String,
+      default: "Chưa nhập",
     },
     priceAdd: {
       type: String,
+      default: "Chưa nhập",
     },
     model: {
       type: String,
+      default: "Chưa nhập",
     },
     isSold: {
       type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

@@ -9,21 +9,21 @@ router.get("/du-lieu", async (req, res) => {
     const where = {
       $or: [
         {
-          name: new RegExp(search, "i"),
-        },
-        {
-          brand: new RegExp(search, "i"),
+          model: new RegExp(search, "i"),
         },
       ],
     };
-    const products = await model.product.find(where).skip(skip).limit(pageSize);
-    const totalCount = await model.product.count(where);
+    const modelProducts = await model.modelProduct
+      .find(where)
+      .skip(skip)
+      .limit(pageSize);
+    const totalCount = await model.modelProduct.count(where);
     return res.json({
       totalCount,
       pageSize,
       currentPage: pageNumber,
       totalPages: Math.ceil(totalCount / pageSize),
-      data: products,
+      data: modelProducts,
     });
   } catch (error) {
     return res.status(500).send(error);
@@ -32,8 +32,8 @@ router.get("/du-lieu", async (req, res) => {
 router.get("/chi-tiet", async (req, res) => {
   try {
     const id = req.query.id;
-    const products = await model.product.findById(id);
-    return res.json({ products });
+    const modelProducts = await model.modelProduct.findById(id);
+    return res.json({ modelProducts });
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -41,8 +41,9 @@ router.get("/chi-tiet", async (req, res) => {
 router.post("/tao", async (req, res) => {
   try {
     const data = req.body;
-    const products = await model.product.create({ ...data });
-    return res.json({ products });
+    console.log(data);
+    const modelProducts = await model.modelProduct.create({ ...data });
+    return res.json({ modelProducts });
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -52,8 +53,10 @@ router.put("/cap-nhat", async (req, res) => {
     const data = req.body;
     const id = req.query.id;
     console.log({ data, id });
-    const products = await model.product.findByIdAndUpdate(id, { ...data });
-    return res.json({ products });
+    const modelProducts = await model.modelProduct.findByIdAndUpdate(id, {
+      ...data,
+    });
+    return res.json({ modelProducts });
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -61,8 +64,8 @@ router.put("/cap-nhat", async (req, res) => {
 router.delete("/xoa", async (req, res) => {
   try {
     const id = req.query.id;
-    const products = await model.product.findByIdAndRemove(id);
-    return res.json({ products });
+    const modelProducts = await model.modelProduct.findByIdAndRemove(id);
+    return res.json({ modelProducts });
   } catch (error) {
     return res.status(500).send(error);
   }

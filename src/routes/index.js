@@ -3,10 +3,14 @@ const productRoute = require("./product");
 const transactionRoute = require("./transaction");
 const modelProductRoute = require("./modelProduct");
 const userRoute = require("./user");
+const authRoute = require("./auth");
 
-router.use("/products", productRoute);
-router.use("/users", userRoute);
-router.use("/transactions", transactionRoute);
-router.use("/modelproducts", modelProductRoute);
+const { checkAuthentication } = require("../middleware/authentication");
+
+router.use("/products", checkAuthentication, productRoute);
+router.use("/users", checkAuthentication, userRoute);
+router.use("/authenticate", authRoute);
+router.use("/transactions", checkAuthentication, transactionRoute);
+router.use("/modelproducts", checkAuthentication, modelProductRoute);
 
 module.exports = router;

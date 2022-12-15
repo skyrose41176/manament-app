@@ -15,6 +15,10 @@ const User = new Schema(
       type: String,
       default: "Chưa nhập",
     },
+    password: {
+      type: String,
+      require: true,
+    },
   },
   { timestamps: true }
 );

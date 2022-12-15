@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const model = require("../models");
+
 router.get("/du-lieu", async (req, res) => {
   try {
     const search = req.query.search ?? "";

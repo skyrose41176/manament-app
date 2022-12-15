@@ -13,8 +13,7 @@ exports.checkAuthentication = (req, res, next) => {
   }
 };
 
-exports.generateToken = (payload) => {
-  console.log(payload);
+exports.generateToken = (payload) => {  
   return jwt.sign(payload, secret, {
     expiresIn: "1h",
   });

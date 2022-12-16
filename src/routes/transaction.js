@@ -2,28 +2,27 @@ const router = require("express").Router();
 const model = require("../models");
 router.get("/du-lieu", async (req, res) => {
   try {
-    const search = req.query.search ?? "";
-    const phone = req.query.phone ?? "";
+    const search = req.query.search.trim() ?? "";
     const pageSize = req.query.pageSize ?? 10;
     const pageNumber = req.query.pageNumber ?? 1;
     const skip = (pageNumber - 1) * pageSize;
+    const modelProductId = req.query.modelProductId ?? "";
     const filter = {};
-    if (phone !== "") {
-      const user = await model.user.findOne({ phone });
-      filter.userId = user?._id ?? null;
+    if (modelProductId !== "") {
+      filter.modelProductId = modelProductId;
     }
     const where = {
       $or: [
         {
-          // dateSold: new RegExp(search, "i"),
+          phoneCustomer: new RegExp(search, "i"),
+        },
+        {
+          nameCustomer: new RegExp(search, "i"),
         },
       ],
       ...filter,
     };
-    const transactions = await model.transaction
-      .find(where)
-      .skip(skip)
-      .limit(pageSize);
+    const transactions = await model.transaction.find(where).skip(skip).limit(pageSize).sort({createdAt:-1});
     const totalCount = await model.transaction.count(where);
     return res.json({
       totalCount,
@@ -40,9 +39,19 @@ router.get("/chi-tiet", async (req, res) => {
   try {
     const id = req.query.id;
     const transactions = await model.transaction.findById(id);
-    return res.json({ transactions });
+    return res.json({ 
+      data:transactions,
+      errors:null,
+      message:null, 
+      succeeded:true
+    });
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({
+      data:null,
+      errors:null,
+      message:`${error}`, 
+      succeeded:false
+    });
   }
 });
 router.post("/tao", async (req, res) => {
@@ -59,9 +68,7 @@ router.put("/cap-nhat", async (req, res) => {
     const data = req.body;
     const id = req.query.id;
     console.log({ data, id });
-    const transactions = await model.transaction.findByIdAndUpdate(id, {
-      ...data,
-    });
+    const transactions = await model.transaction.findByIdAndUpdate(id, { ...data });
     return res.json({ transactions });
   } catch (error) {
     return res.status(500).send(error);

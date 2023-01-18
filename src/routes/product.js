@@ -2,7 +2,7 @@ const router = require("express").Router();
 const model = require("../models");
 router.get("/du-lieu", async (req, res) => {
   try {
-    const search = req.query.search ?? "";
+    const search = req.query.search.trim() ?? "";
     const pageSize = req.query.pageSize ?? 10;
     const pageNumber = req.query.pageNumber ?? 1;
     const skip = (pageNumber - 1) * pageSize;
@@ -16,7 +16,7 @@ router.get("/du-lieu", async (req, res) => {
         },
       ],
     };
-    const products = await model.product.find(where).skip(skip).limit(pageSize);
+    const products = await model.product.find(where).skip(skip).limit(pageSize).sort({createdAt:-1});
     const totalCount = await model.product.count(where);
     return res.json({
       totalCount,
@@ -33,9 +33,19 @@ router.get("/chi-tiet", async (req, res) => {
   try {
     const id = req.query.id;
     const products = await model.product.findById(id);
-    return res.json({ products });
+    return res.json({ 
+      data:products,
+      errors:null,
+      message:null, 
+      succeeded:true
+    });
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({
+      data:null,
+      errors:null,
+      message:`${error}`, 
+      succeeded:false
+    });
   }
 });
 router.post("/tao", async (req, res) => {

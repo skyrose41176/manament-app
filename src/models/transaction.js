@@ -10,10 +10,13 @@ const Transaction = new Schema(
       required: true,
       ref: modelProduct,
     },
-    userId: {
-      type: ObjectId,
-      ref: user,
-      required: true,
+    nameCustomer: {
+      type: String,
+      require:true
+    },
+    phoneCustomer: {
+      type: String,
+      require:true
     },
     priceIn: {
       type: Number,
